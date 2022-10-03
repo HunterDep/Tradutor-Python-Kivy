@@ -58,7 +58,6 @@ Tradução:
 		Label:
 			id: resultado
 			text: ''
-
 """
 
 class Tradução(FloatLayout):
