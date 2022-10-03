@@ -54,8 +54,8 @@ Tradução:
 	BoxLayout:
 		id: box_resultado
 		size_hint_y: .5
-		padding: 500
-		Label:
+		padding: 50
+		TextInput:
 			id: resultado
 			text: ''
 """
@@ -82,7 +82,6 @@ class TradutorPython(App):
 		self.root.ids.box_texto.y = 770
 		self.root.ids.box_lang.y = 555
 		self.root.ids.traduzir.y = 390
-		self.root.ids.box_resultado.y = -100
-		self.root.ids.box_resultado.x = -150
+		self.root.ids.box_resultado.y = 170
 		
 TradutorPython().run()
