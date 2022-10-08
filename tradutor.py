@@ -11,6 +11,11 @@ from kivy.lang import Builder
 from kivy.uix.floatlayout import FloatLayout
 from googletrans import Translator
 
+langs = {
+	"Português": "pt",
+	"Inglês": "en"
+}
+
 Código = """
 Tradução:
 	size_hint_y: .5
@@ -40,7 +45,7 @@ Tradução:
 		padding: 100
 		Button:
 			id: lang
-			text: 'pt'
+			text: 'Português'
 			on_press: root.MudarLang()
 			
 	BoxLayout:
@@ -58,20 +63,36 @@ Tradução:
 		TextInput:
 			id: resultado
 			text: ''
+			
+	BoxLayout:
+		id: trocar
+		size_hint_y: .5
+		padding: 115
+		Button:
+			text: 'Trocar'
+			on_press: root.Trocar()
 """
 
 class Tradução(FloatLayout):
 	def MudarLang(self):
-		if self.ids.lang.text in "pt":
-			self.ids.lang.text = "en"
-		elif self.ids.lang.text in "en":
-			self.ids.lang.text = "pt"
+		if self.ids.lang.text in "Português":
+			self.ids.lang.text = "Inglês"
+		elif self.ids.lang.text in "Inglês":
+			self.ids.lang.text = "Português"
 			
 	def Função(self):
 		texto = self.ids.texto.text
 		tradutor = Translator()
-		tradução = tradutor.translate(texto, dest=self.ids.lang.text)
+		tradução = tradutor.translate(texto, dest=langs[self.ids.lang.text])
 		self.ids.resultado.text = f"{tradução.text}"
+		
+	def Trocar(self):
+		tradutor = Translator()
+		txt1 = self.ids.texto.text
+		txt2 = self.ids.resultado.text
+		
+		self.ids.texto.text = txt2
+		self.ids.resultado.text = txt1
 
 class TradutorPython(App):
 	def build(self):
@@ -83,5 +104,6 @@ class TradutorPython(App):
 		self.root.ids.box_lang.y = 555
 		self.root.ids.traduzir.y = 390
 		self.root.ids.box_resultado.y = 170
+		self.root.ids.trocar.y = -50
 		
 TradutorPython().run()
